@@ -1,13 +1,16 @@
 <?
-MODU inc/index;
+include('head.hut', {title:'HUTIA - 首页', mainLayoutClass:'homepage'});
 
-header();
-?>
+include('header.hut');
 
-haha
+include('index-body.hut');
 
-<?
-
-footer();
+include('foot.hut');
 
 ?>
+
+		
+		
+		
+
+		

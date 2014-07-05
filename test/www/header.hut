@@ -1,12 +1,94 @@
-<!Doctype html>
-<html xmlns=http://www.w3.org/1999/xhtml>
-<head>
-	<meta http-equiv=Content-Type content="text/html;charset=utf-8" />
-	<title>Hutia</title>
-	<link type="text/css" rel="stylesheet" href="/css/main.css" />
-	<link type="text/css" rel="stylesheet" href="/css/jqui.css" />
-	<!-- script src="/socket.io/socket.io.js"></script -->
-	<script type="text/javascript" src="/js/jq.js"></script>
-	<script type="text/javascript" src="/js/jqui.js"></script>
-</head>
-<body>
+<?
+/*====================================
+ * 数据部分
+ *====================================
+**/
+
+// 顶部
+var topNavMenu = {
+	'首页' : 'index.hut',
+	'下拉菜单' : {
+		'菜单项目1' : '',
+		'菜单项目2' : '',
+		'其他' : {
+			'还有什么呢' : '',
+			'不明觉厉啊' : ''
+		},
+	},
+	'左边栏' : 'left-sidebar.hut',
+	'右边栏' : 'right-sidebar.hut',
+	'无边栏' : 'no-sidebar.hut'
+};
+
+
+/*====================================
+ * 控制部分
+ *====================================
+**/
+
+function nav(obj, current){
+	current = new RegExp(String(current).replace(/^[\\\/]/g, '').replace(/(\W)/g, '\\$1'), 'i');
+	var re = ['<ul>'];
+	for (var i in obj){
+		if ('object' === typeof obj[i]) {
+			re.push('<li>');
+			re.push('<span>' + i + '</span>');
+			re.push(nav(obj[i]));
+			re.push('</li>');
+		} else {
+			re.push('<li' + (current.test(obj[i])? ' class="current_page_item"' : '') + '>');
+			re.push('<a href="'+obj[i]+'">' + i + '</a>');
+			re.push('</li>');
+		}
+	}
+	re.push('</ul>');
+	return re.join('');
+}
+
+?>
+
+<?
+/*====================================
+ * 模板部分
+ *====================================
+**/
+
+?>
+
+<!-- Header Wrapper -->
+<div id="header-wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="12u">
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<h1><a href="?<?=Math.random();?>" id="logo">HUTIA</a></h1>
+							
+							<!-- Nav -->
+								<nav id="nav">
+									<?=nav(topNavMenu, request.path);?>
+								</nav>
+						
+						</div>
+					</header>
+
+<?if (/^[\\\/]index.hut/i.test(request.path)){?>
+				<!-- Banner -->
+					<div id="banner">
+						<h2><strong>HUTIA:</strong> 一个免费的Node服务器脚本引擎<br />
+						基于 express 与 connect。本演示基于 <a href="http://html5up.net">HTML5 UP</a></h2>
+						<p>
+							获取最新的版本：<a href="https://github.com/hutia/hutia">Github</a><br/>
+							或者你可以：
+						</p>
+						<a href="#" class="button big fa fa-check-circle">本地下载</a>
+					</div>
+<?}?>
+
+			</div>
+		</div>
+	</div>
+</div>

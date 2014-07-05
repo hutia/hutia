@@ -1,6 +1,6 @@
 {
   "name": "hutia",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Hutia's node server based on express and socket.io",
   "main": "index",
   "dependencies": {
