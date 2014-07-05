@@ -1,0 +1,39 @@
+<?
+var sqlite3 = require('sqlite3').verbose();
+var util = require('util');
+
+// table structures
+
+var DB_TABLES = {
+	'user' : {
+		'id' : 'INTEGER PRIMARY KEY AUTOINCREMENT',
+		'name' : 'varchar(255) NOT NULL',
+		'pass' : 'varchar(255) NOT NULL',
+		'email' : 'varchar(255)',
+		'sex' : 'int',
+		'level' : 'int'
+	}
+};
+
+function openDB(callback){
+	return new sqlite3.Database(CONFIG.database, callback);
+}
+
+function createTable(db, name, cols, callback){
+	var sql = [];
+	for (var c in cols) sql.push(c + ' ' + cols[c]);
+	db.exec('DROP TABLE IF EXISTS `' + name + '`;');
+	return db.exec('CREATE TABLE `' + name + '`(' + sql.join(',') + ');', callback);
+}
+
+function dbInsert(db, table, data, callback){
+	var names = [], values = [];
+	for (var name in data) {
+		names.push('`'+name+'`');
+		values.push(util.format('%j', data[name]));
+	}
+	db.exec('INSERT INTO `' + table + '` (' + names.join(',') + ') VALUES (' + values.join(',') + ');', callback);
+}
+
+
+?>

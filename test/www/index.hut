@@ -1,0 +1,13 @@
+<?
+MODU inc/index;
+
+header();
+?>
+
+haha
+
+<?
+
+footer();
+
+?>

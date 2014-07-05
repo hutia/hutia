@@ -1,0 +1,12 @@
+<?
+MODU conn;
+
+function header(){
+	include('/header');
+}
+
+function footer(){
+	include('/footer');
+}
+
+?>

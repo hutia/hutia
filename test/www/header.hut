@@ -1,0 +1,12 @@
+<!Doctype html>
+<html xmlns=http://www.w3.org/1999/xhtml>
+<head>
+	<meta http-equiv=Content-Type content="text/html;charset=utf-8" />
+	<title>Hutia</title>
+	<link type="text/css" rel="stylesheet" href="/css/main.css" />
+	<link type="text/css" rel="stylesheet" href="/css/jqui.css" />
+	<!-- script src="/socket.io/socket.io.js"></script -->
+	<script type="text/javascript" src="/js/jq.js"></script>
+	<script type="text/javascript" src="/js/jqui.js"></script>
+</head>
+<body>
